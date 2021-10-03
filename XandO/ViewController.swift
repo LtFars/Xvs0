@@ -294,7 +294,6 @@ class ViewController: UIViewController {
         //  Проверка по вертикали
         for index in 0..<field.count {
             var lineElements = [String]()
-            
             for (i, line) in field.enumerated() {
                 for (j, cell) in line.enumerated() {
                     if index == j {
@@ -305,12 +304,15 @@ class ViewController: UIViewController {
             }
             var count = 0
             for i in lineElements {
-                i == winner ? (count += 1) : (count = 0)
+                if i == winner {
+                    count += 1 } else {
+                        buttonsPosition = [String]()
+                        count = 0 }
                 if count > 2 {
                     changeColorOfButtons()
-                    return true }
-                else {
-                    buttonsPosition = [String]()
+                    return true
+                } else {
+                    
                 }
             }
         }
