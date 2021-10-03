@@ -285,10 +285,10 @@ class ViewController: UIViewController {
                 }
                 if count > 2 {
                     changeColorOfButtons()
-                    }
                     return true
                 }
             }
+         
         
         
         //  Проверка по вертикали
@@ -318,6 +318,7 @@ class ViewController: UIViewController {
                 }
             }
         }
+        
         
         //  Проверка по всем диагоналям
         for (i, line) in field.enumerated() {
