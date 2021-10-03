@@ -288,6 +288,7 @@ class ViewController: UIViewController {
                     return true
                 }
             }
+        }
          
         
         
@@ -323,7 +324,10 @@ class ViewController: UIViewController {
         //  Проверка по всем диагоналям
         for (i, line) in field.enumerated() {
             for (j, cell) in line.enumerated() {
+                buttonsPosition = [String]()
+                var buttonsPositionSideDiag = [String]()
                 if cell == winner {
+                    buttonsPosition.append(String(i)+":"+String(j))
                     var countMainDiag = 1
                     var countSideDiag = 1
                     var mainX = i+1
@@ -336,20 +340,28 @@ class ViewController: UIViewController {
                             //  Проверка по "главной" диагонали
                             if mainX == k && mainY == n {
                                 if cell == winner {
+                                    buttonsPosition.append(String(mainX)+":"+String(mainY))
                                     mainX += 1
                                     mainY += 1
                                     countMainDiag += 1
-                                    if countMainDiag > 2 { return true }
+                                    
+                                    if countMainDiag > 2 {
+                                        changeColorOfButtons()
+                                        return true }
                                 } else { countMainDiag = 0 }
                             }
                             
                             //  Проверка по "побочной" диагонали
                             if sideX == k && sideY == n {
                                 if cell == winner {
+                                    buttonsPosition.append(String(sideX)+":"+String(sideY))
                                     sideX += 1
                                     sideY -= 1
                                     countSideDiag += 1
-                                    if countSideDiag > 2 { return true }
+                                    if countSideDiag > 2 {
+                                        changeColorOfButtons()
+                                        return true
+                                    }
                                 } else { countSideDiag = 0 }
                             }
                         }
