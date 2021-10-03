@@ -228,6 +228,7 @@ class ViewController: UIViewController {
         let buttons: [UIButton] = [oneButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton, eightButton, nineButton]
         buttons.forEach {
             $0.setImage(UIImage(systemName: "stop"), for: .normal)
+            $0.tintColor = .orange
         }
         label.text = "First player`s turn"
         label.textColor = .systemOrange
@@ -242,21 +243,62 @@ class ViewController: UIViewController {
 
     private func checkWinner(_ field: [[String]], winner: String) -> Bool {
         
-        //  Проверка по горизонтали
-        for (_, line) in field.enumerated() {
-            var count = 0
-            for (_, cell) in line.enumerated() {
-                cell == winner ? (count += 1) : (count = 0)
-                if count > 2 { return true }
+        var buttonsPosition = [String]()
+        
+        func changeColorOfButtons() {
+            for i in buttonsPosition {
+                switch i {
+                case "0:0":
+                    oneButton.tintColor = .systemGreen
+                case "0:1":
+                    twoButton.tintColor = .systemGreen
+                case "0:2":
+                    threeButton.tintColor = .systemGreen
+                case "1:0":
+                    fourButton.tintColor = .systemGreen
+                case "1:1":
+                    fiveButton.tintColor = .systemGreen
+                case "1:2":
+                    sixButton.tintColor = .systemGreen
+                case "2:0":
+                    sevenButton.tintColor = .systemGreen
+                case "2:1":
+                    eightButton.tintColor = .systemGreen
+                case "2:2":
+                    nineButton.tintColor = .systemGreen
+                default:
+                    break
+                }
             }
         }
+        
+        //  Проверка по горизонтали
+        for (i, line) in field.enumerated() {
+            var count = 0
+            for (j, cell) in line.enumerated() {
+                if cell == winner {
+                    count += 1
+                    buttonsPosition.append(String(i)+":"+String(j))
+                } else {
+                    count = 0
+                    buttonsPosition = [String]()
+                }
+                if count > 2 {
+                    changeColorOfButtons()
+                    }
+                    return true
+                }
+            }
+        
         
         //  Проверка по вертикали
         for index in 0..<field.count {
             var lineElements = [String]()
-            for (_, line) in field.enumerated() {
+            
+            for (i, line) in field.enumerated() {
                 for (j, cell) in line.enumerated() {
                     if index == j {
+                        buttonsPosition.append(String(i)+":"+String(j))
                         lineElements.append(cell)
                     }
                 }
@@ -264,7 +306,12 @@ class ViewController: UIViewController {
             var count = 0
             for i in lineElements {
                 i == winner ? (count += 1) : (count = 0)
-                if count > 2 { return true }
+                if count > 2 {
+                    changeColorOfButtons()
+                    return true }
+                else {
+                    buttonsPosition = [String]()
+                }
             }
         }
         
@@ -308,3 +355,15 @@ class ViewController: UIViewController {
         return false
     }
 }
+
+/*
+ 
+ 
+ O O X
+ X O O
+ X X X
+ 
+ 
+ 
+ 
+ */
