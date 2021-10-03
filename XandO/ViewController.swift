@@ -325,7 +325,6 @@ class ViewController: UIViewController {
         for (i, line) in field.enumerated() {
             for (j, cell) in line.enumerated() {
                 buttonsPosition = [String]()
-                var buttonsPositionSideDiag = [String]()
                 if cell == winner {
                     buttonsPosition.append(String(i)+":"+String(j))
                     var countMainDiag = 1
@@ -373,14 +372,3 @@ class ViewController: UIViewController {
     }
 }
 
-/*
- 
- 
- O O X
- X O O
- X X X
- 
- 
- 
- 
- */
