@@ -305,9 +305,11 @@ class ViewController: UIViewController {
             var count = 0
             for i in lineElements {
                 if i == winner {
-                    count += 1 } else {
-                        buttonsPosition = [String]()
-                        count = 0 }
+                    count += 1
+                } else {
+                    buttonsPosition = [String]()
+                    count = 0
+                }
                 if count > 2 {
                     changeColorOfButtons()
                     return true
